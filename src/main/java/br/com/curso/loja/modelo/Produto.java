@@ -4,11 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity // classe produto irá mapear uma tabela no banco de dados
@@ -16,20 +15,22 @@ import javax.persistence.Table;
 public class Produto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Id declara o PK do banco e Generated define o tipo de auto increment se houver
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Id declara o PK do banco e Generated define o tipo de auto
+														// increment se houver
 	private Long id;
 	private String nome;
-	private String descricao; // @Column(name = "desc") exemplo se o nome da variavel for diferente do banco de dados
+	private String descricao; // @Column(name = "desc") exemplo se o nome da variavel for diferente do banco
+								// de dados
 	private BigDecimal preco;
-	private LocalDate dataCadastro = 	LocalDate.now();
-	
-	@Enumerated(EnumType.STRING)
+	private LocalDate dataCadastro = LocalDate.now();
+
+	@ManyToOne
 	private Categoria categoria;
-	
-	
+
+	public Produto() {
+	}
 
 	public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
@@ -43,8 +44,6 @@ public class Produto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 
 	public LocalDate getDataCadastro() {
 		return dataCadastro;

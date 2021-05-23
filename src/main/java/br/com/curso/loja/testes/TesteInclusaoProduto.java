@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 
+import br.com.curso.loja.dao.CategoriaDAO;
 import br.com.curso.loja.dao.ProdutoDAO;
 import br.com.curso.loja.modelo.Categoria;
 import br.com.curso.loja.modelo.Produto;
@@ -13,7 +14,8 @@ public class TesteInclusaoProduto {
 
 	public static void main(String[] args) {
 
-		Produto celular = new Produto("Sansung", "Versão A30 128GB", new BigDecimal("1500"), Categoria.CELULARES);
+		Categoria celulares = new Categoria("CELULARES");
+		Produto celular = new Produto("Sansung", "Versão A30 128GB", new BigDecimal("1500"), celulares);
 	
 		
 		//cria um factory pegando o valor declarado dentro do XML
@@ -21,12 +23,15 @@ public class TesteInclusaoProduto {
 		EntityManager em = JPAUtil.getEntityManager();
 		//Cria uma Entity pegando as configurações do factory
 
-		ProdutoDAO dao = new ProdutoDAO(em);
+		ProdutoDAO produtoDAO = new ProdutoDAO(em);
+		CategoriaDAO categoriaDAO = new CategoriaDAO(em);
 		
-	
+		
 		em.getTransaction().begin(); //inicia a transação
 		
-		dao.cadastrar(celular);
+		categoriaDAO.cadastrar(celulares);//salvando primeiro a categoria no banco de dados para não dar erro de transiente quanto tentar persistir o produto 
+		produtoDAO.cadastrar(celular);
+		
 		em.getTransaction().commit();
 		
 		em.close(); //fecha a Transação
