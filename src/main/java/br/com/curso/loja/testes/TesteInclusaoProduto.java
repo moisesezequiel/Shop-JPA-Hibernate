@@ -15,10 +15,10 @@ public class TesteInclusaoProduto {
 	public static void main(String[] args) {
 
 		Categoria celulares = new Categoria("CELULARES");
-		Produto celular = new Produto("Sansung", "Versão A30 128GB", new BigDecimal("1500"), celulares);
+		Produto celular = new Produto("TABLET", "Versão A30 128GB", new BigDecimal("1500"), celulares);
 	
 		
-		//cria um factory pegando o valor declarado dentro do XML
+			
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		//Cria uma Entity pegando as configurações do factory
