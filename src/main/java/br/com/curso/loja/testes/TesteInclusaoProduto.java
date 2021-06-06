@@ -1,6 +1,7 @@
 package br.com.curso.loja.testes;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -14,30 +15,43 @@ public class TesteInclusaoProduto {
 
 	public static void main(String[] args) {
 
-		Categoria celulares = new Categoria("CELULARES");
-		Produto celular = new Produto("TABLET", "Versão A30 128GB", new BigDecimal("1500"), celulares);
-	
-		
-			
+		cadastrarProduto();
 		
 		EntityManager em = JPAUtil.getEntityManager();
-		//Cria uma Entity pegando as configurações do factory
+
+		ProdutoDAO produtoDAO = new ProdutoDAO(em);
+		 
+//find Id
+//	   Produto  p =	produtoDAO.buscarPorId(1L); 
+//	   System.out.println(p.getNome());
+	 
+	   
+//find All
+	   List<Produto> todos = produtoDAO.buscarTodos();
+	   todos.forEach(p2 -> System.out.println(p2.getNome()));
+		
+		
+		
+	}
+
+	private static void cadastrarProduto() {
+		Categoria celulares = new Categoria("CELULARES");
+		Produto celular = new Produto("TABLET", "Versão A30 128GB", new BigDecimal("1500"), celulares);
+		
+		EntityManager em = JPAUtil.getEntityManager();
 
 		ProdutoDAO produtoDAO = new ProdutoDAO(em);
 		CategoriaDAO categoriaDAO = new CategoriaDAO(em);
 		
 		
-		em.getTransaction().begin(); //inicia a transação
+		em.getTransaction().begin(); 
 		
-		categoriaDAO.cadastrar(celulares);//salvando primeiro a categoria no banco de dados para não dar erro de transiente quanto tentar persistir o produto 
+		categoriaDAO.cadastrar(celulares);
 		produtoDAO.cadastrar(celular);
 		
 		em.getTransaction().commit();
 		
-		em.close(); //fecha a Transação
-		
-		
-		
+		em.close();
 	}
 
 }
