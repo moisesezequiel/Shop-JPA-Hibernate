@@ -35,4 +35,34 @@ public class ProdutoDAO {
 	}
 	//buscar Todos , cria um select só que em linguagem Jpql
 	//create query apenas monta a query o que dispara-a e pega o resultado é  getResultList
+	
+	
+	public List<Produto> buscarPorNome(String nome ) {
+		
+		String jpql = "SELECT p from Produto p  WHERE p.nome = :nome";
+		
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("nome", nome)
+				.getResultList();
+		
+		// os : dentro da query devera ser o valor do atributo 
+		//ou declarar com ? 
+		//no metodo setparameter voce declara qual valor será atribuido ao parametro 
+		
+	}
+	
+	
+	public List<Produto> buscarPorNomeCategoria(String nome) {
+		
+		String jpql = "SELECT p from Produto p  WHERE p.categoria.nome = ?1";
+
+		
+		return em.createQuery(jpql, Produto.class)
+				.setParameter(1, nome)
+				.getResultList();
+	}
+	
+	//filtra por categoria, so declarar a Orientação ao OBJ que o JPA ja se encarrega de fazer o
+	//join na tabela 
+	
 }

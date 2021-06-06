@@ -27,8 +27,19 @@ public class TesteInclusaoProduto {
 	 
 	   
 //find All
-	   List<Produto> todos = produtoDAO.buscarTodos();
+//	   List<Produto> todos = produtoDAO.buscarTodos();
+//	   todos.forEach(p2 -> System.out.println(p2.getNome()));
+	   
+	   
+//find por nome
+//	   List<Produto> todos = produtoDAO.buscarPorNome("TABLET");
+//	   todos.forEach(p2 -> System.out.println(p2.getDescricao()));
+	   
+	   
+//find por nome
+	   List<Produto> todos = produtoDAO.buscarPorNomeCategoria("CELULARES");
 	   todos.forEach(p2 -> System.out.println(p2.getNome()));
+		
 		
 		
 		
