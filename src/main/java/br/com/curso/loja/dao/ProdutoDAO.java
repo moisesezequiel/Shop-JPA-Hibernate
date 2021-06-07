@@ -1,5 +1,6 @@
 package br.com.curso.loja.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -64,5 +65,17 @@ public class ProdutoDAO {
 	
 	//filtra por categoria, so declarar a Orientação ao OBJ que o JPA ja se encarrega de fazer o
 	//join na tabela 
+	
+	public BigDecimal buscarPrecoDoProdutocomNome(String nome ) {
+		
+		String jpql = "SELECT p.preco from Produto p  WHERE p.nome = :nome";
+		
+		return em.createQuery(jpql, BigDecimal.class)
+				.setParameter("nome", nome)
+				.getSingleResult();
+		
+		//trazendo apenas o preco da entidade e usando getSingleResult para trazer um unico resultado 
+	
+	}
 	
 }

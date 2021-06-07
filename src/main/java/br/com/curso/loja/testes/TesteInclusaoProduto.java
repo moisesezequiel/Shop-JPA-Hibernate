@@ -37,10 +37,13 @@ public class TesteInclusaoProduto {
 	   
 	   
 //find por nome
-	   List<Produto> todos = produtoDAO.buscarPorNomeCategoria("CELULARES");
-	   todos.forEach(p2 -> System.out.println(p2.getNome()));
+//	   List<Produto> todos = produtoDAO.buscarPorNomeCategoria("CELULARES");
+//	   todos.forEach(p2 -> System.out.println(p2.getNome()));
 		
+//Find preco do produto 
 		
+		BigDecimal precoProduto = produtoDAO.buscarPrecoDoProdutocomNome("TABLET");
+		System.out.println(precoProduto);
 		
 		
 	}
