@@ -2,6 +2,7 @@ package br.com.curso.loja.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,10 +26,16 @@ public class Pedido {
 	@ManyToOne
 	private Cliente cliente;
 	
-	@OneToMany
-	private List<ItemPedido> itens;
+	@OneToMany(mappedBy = "pedido") //adiconar no toMany o mappedBy para a JPA mapear dos 2 lados o mesmo relacionamento 
+	private List<ItemPedido> itens = new ArrayList<>();
 
 	public Pedido() {
+		
+	}
+	
+	public void adicionarItem(ItemPedido item) {//metodo para adicionar um item a lista 
+		item.setPedido(this);
+		this.itens.add(item); 
 	}
 
 	public Pedido(Cliente cliente) {
