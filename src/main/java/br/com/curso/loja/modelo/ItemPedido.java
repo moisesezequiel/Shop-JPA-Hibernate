@@ -2,6 +2,7 @@ package br.com.curso.loja.modelo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,10 @@ public class ItemPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "preco_unitario")
 	private BigDecimal precoUnitario;
+	
 	private int quantidade;
 
 	@ManyToOne
@@ -32,7 +36,7 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 		this.pedido = pedido;
 		this.produto = produto;
-		this.precoUnitario = produto.getPreco();
+		this.precoUnitario = produto.getPreco();//pegando preco do produto escolhido
 	}
 
 	public Long getId() {
