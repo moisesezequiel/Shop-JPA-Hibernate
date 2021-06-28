@@ -24,7 +24,7 @@ public class Pedido {
 	private Long id;
 	
 	@Column(name = "valor_total")
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO; //iniciando o valor defalt
 	
 	private LocalDate data = LocalDate.now();
 
@@ -41,6 +41,7 @@ public class Pedido {
 	public void adicionarItem(ItemPedido item) {//metodo para adicionar um item a lista 
 		item.setPedido(this);
 		this.itens.add(item); 
+		this.valorTotal = this.valorTotal.add(item.getvalor()); //toda vez que o metodo adiconar for chamado eu adiciono o valor do pedido a variavel 
 	}
 
 	public Pedido(Cliente cliente) {

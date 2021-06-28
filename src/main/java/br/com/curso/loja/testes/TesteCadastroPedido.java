@@ -44,12 +44,19 @@ public class TesteCadastroPedido {
 		pedidoDao.cadastrar(pedido);
 		
 		
-		em.getTransaction().commit	(); 
+
+		em.getTransaction().commit(); 
+		
+		BigDecimal totalVendido = pedidoDao.valorTotalVendido();
+	
+		System.out.println("Valor Total vendido = " +totalVendido);
+		
+				
 	}
 
 	private static void popularBancoDados() {
 		Categoria celulares = new Categoria("CELULARES");
-		Produto celular = new Produto("TABLET", "Versão A30 128GB", new BigDecimal("1500"), celulares);
+		Produto celular = new Produto("TABLET", "Versão A30 128GB", new BigDecimal("800"), celulares);
 		Cliente cliente = new Cliente("Mauricio", "233412");
 
 		EntityManager em = JPAUtil.getEntityManager();

@@ -78,6 +78,10 @@ public class ItemPedido {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
+	public BigDecimal getvalor() {
+		return precoUnitario.multiply(new BigDecimal(quantidade)); //multiplica o valor do preco x quantidade (em cast por causa da tipagem (INT))
+	}
 	
 
 }
