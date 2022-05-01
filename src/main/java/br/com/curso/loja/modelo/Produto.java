@@ -8,15 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity // classe produto irá mapear uma tabela no banco de dados
 @Table(name = "produtos") // setando o nome semelhante ao da tabela
+@NamedQuery(name ="Produto.produtosPorCategoria",query = "SELECT p from Produto p  WHERE p.categoria.nome = :nome") //exemplo de namedQuery
 public class Produto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Id declara o PK do banco e Generated define o tipo de auto
-														// increment se houver
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Id declara o PK do banco e Generated define o tipo de auto // increment se houver
 	private Long id;
 	private String nome;
 	private String descricao; // @Column(name = "desc") exemplo se o nome da variavel for diferente do banco

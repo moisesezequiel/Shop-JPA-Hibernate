@@ -29,7 +29,7 @@ public class Pedido {
 	private LocalDate data = LocalDate.now();
 
 	@ManyToOne
-	private Cliente cliente;
+	private Cliente cliente;									// no lado que possui o toMany
 	                                                            //cascade é para dizer que tudo que fizer com um pedido faça tbm com o item pedido  
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL) //adiconar no toMany o mappedBy para a JPA mapear dos 2 lados o mesmo relacionamento 
 	private List<ItemPedido> itens = new ArrayList<>();
@@ -38,7 +38,7 @@ public class Pedido {
 		
 	}
 	
-	public void adicionarItem(ItemPedido item) {//metodo para adicionar um item a lista 
+	public void adicionarItem(ItemPedido item) {//metodo para adicionar um item a lista para os 2 lados se conhecerem 
 		item.setPedido(this);
 		this.itens.add(item); 
 		this.valorTotal = this.valorTotal.add(item.getvalor()); //toda vez que o metodo adiconar for chamado eu adiciono o valor do pedido a variavel 
