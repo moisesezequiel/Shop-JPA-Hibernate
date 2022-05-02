@@ -15,8 +15,8 @@ import javax.persistence.Table;
 
 @Entity // classe produto irá mapear uma tabela no banco de dados
 @Table(name = "produtos") // setando o nome semelhante ao da tabela
-@NamedQuery(name ="Produto.produtosPorCategoria",query = "SELECT p from Produto p  WHERE p.categoria.nome = :nome") //exemplo de namedQuery
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //Classe mae e organizando tudo em uma tabela 
+@NamedQuery(name ="Produto.produtosPorCategoria",query = "SELECT p from Produto p  WHERE p.categoria.id.nome = :nome") //exemplo de namedQuery
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //Classe mae e organizando tudo em uma tabela /2opção Joined para organizar em tabelas diferentes 
 public class Produto {
 
 	@Id

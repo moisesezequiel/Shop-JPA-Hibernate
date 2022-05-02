@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import br.com.curso.loja.dao.CategoriaDAO;
 import br.com.curso.loja.dao.ProdutoDAO;
 import br.com.curso.loja.modelo.Categoria;
+import br.com.curso.loja.modelo.CategoriaID;
 import br.com.curso.loja.modelo.Produto;
 import br.com.curso.loja.util.JPAUtil;
 
@@ -64,6 +65,8 @@ public class TesteInclusaoProduto {
 		produtoDAO.cadastrar(celular);
 		
 		em.getTransaction().commit();
+		
+		em.find(Categoria.class, new CategoriaID("CELULARES","xpto"));
 		
 		em.close();
 	}
