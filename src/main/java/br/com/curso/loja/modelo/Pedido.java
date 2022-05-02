@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Pedido {
 	
 	private LocalDate data = LocalDate.now();
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)//lazy para só carregar se for necessário 
 	private Cliente cliente;									// no lado que possui o toMany
 	                                                            //cascade é para dizer que tudo que fizer com um pedido faça tbm com o item pedido  
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL) //adiconar no toMany o mappedBy para a JPA mapear dos 2 lados o mesmo relacionamento 
@@ -40,7 +41,7 @@ public class Pedido {
 	
 	public void adicionarItem(ItemPedido item) {//metodo para adicionar um item a lista para os 2 lados se conhecerem 
 		item.setPedido(this);
-		this.itens.add(item); 
+		this.getItens().add(item); 
 		this.valorTotal = this.valorTotal.add(item.getvalor()); //toda vez que o metodo adiconar for chamado eu adiciono o valor do pedido a variavel 
 	}
 
@@ -78,6 +79,14 @@ public class Pedido {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
 	}
 
 }
