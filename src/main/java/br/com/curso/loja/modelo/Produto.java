@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 @Entity // classe produto irá mapear uma tabela no banco de dados
 @Table(name = "produtos") // setando o nome semelhante ao da tabela
 @NamedQuery(name ="Produto.produtosPorCategoria",query = "SELECT p from Produto p  WHERE p.categoria.nome = :nome") //exemplo de namedQuery
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //Classe mae e organizando tudo em uma tabela 
 public class Produto {
 
 	@Id
